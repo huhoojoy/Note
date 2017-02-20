@@ -19,7 +19,7 @@
     .btn {
        background-color: #00A0D6;
        transition: 0.4s;
-       <!-- 即：transition: all 0.4s ease 0; -->
+       /* 即：transition: all 0.4s ease 0; */
     }
 
   2. transition 也可以控制botton的text内容的color动画：
@@ -27,7 +27,7 @@
         background-color: #00A0D6;
         color: #FFFFFF;
         transition: all 0.4;
-        <!--transition: background-color 0.4s, color 0.4s; -->
+        /*transition: background-color 0.4s, color 0.4s; */
       }
       .btn:hover {
         background-color: #007DA7;
@@ -37,9 +37,9 @@
 
   3. 使用vendor prefixes(可以使用 caniuse.com之类的网站检查浏览器支持的prefixes)
       .btn {
-        -webkit-transition: backgroud-color: .4s; <!--Safari/Chrome-->
-        -moz-transition: backgroud-color: .4s;<!--Mozilla-->
-        -ms-transition: backgroud-color: .4s;<!--IE-->
-        -o-transition: backgroud-color: .4s;<!--Opera-->
+        -webkit-transition: backgroud-color: .4s; /*Safari/Chrome*/
+        -moz-transition: backgroud-color: .4s;/*Mozilla*/
+        -ms-transition: backgroud-color: .4s;/*IE*/
+        -o-transition: backgroud-color: .4s;/*Opera*/
         transition: backgroud-color: .4s;
       }
