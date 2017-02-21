@@ -80,3 +80,62 @@
       .btn:hover .bottom { top: 0px;}
 
 三 transition实现按钮弹窗（transitioning visibility）
+   1. 创建弹窗背景overlay层
+   <div class="modal-overlay"></div> /*overlay*/
+
+   <div class="modal">
+     <div class="modal-header">
+       <a class="modal-close">&times;</a>
+       <h3>Purchase Sweet Land</h3>
+     </div>
+
+     <div class="modal-content">
+       <form class="form" action="">
+       ...
+       </form>
+     </div>
+   </div>
+
+     设置初始状态和active状态的样式：
+     .modal,
+     .modal-overlay {
+       visibility: hidden;   /*初始状态样式*/
+       opacity: 0;
+     }
+
+     .modal.active,
+     .modal-overlay.active {
+       opacity: 1;           /*active状态样式*/
+       visibility: visible;
+     }
+     //*opacity: 0;设置overlay和form的样式为不可见，但是overlay元素和form元素仍然占据一定的高度和宽度，
+       visibility: hidden;使得overlay元素和form元素在click事件被触发时才显示出来。//
+
+     transition可以将form和overlay的转变过程变得可控，变化曲线更加平滑，
+     为form和overlay添加transition样式：
+      .modal,
+      .modal-overlay {
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity .5s, vidibility .5s; /*all .5s;*/
+      }
+
+     //并不是所有的属性都能transition，比如display。
+     对于display这样只有确定状态的属性值，无法用transition来平滑其变化过程，
+     在使用transition之前，需要认真考虑该属性值是否存在中间变化状态。//
+
+     附可以使用transition的属性值表(部分)：
+        background-color        margin-bottom      padding-bottom
+        background-position     margin-left        padding-left
+        border-left-color       mardin-right       padding-right
+        border-left-width       margin-top         padding-top
+        border-spacing          max-height         right
+        color                   max-width          text-indent
+        font-size               min-height         text-shadow
+        font-weight             min-width          vertical-align
+        left                    opacity            visibility
+        letter-spacing          outline-color      word-spacing
+        line-height             outline-width      z-index
+
+
+     
