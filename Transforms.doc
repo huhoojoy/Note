@@ -1,1 +1,88 @@
+一 transform可以设置元素的形状、位置、大小变化，例如旋转、移动、变大变小等。
+  1. rotate
 
+         /*close元素的初始样式*/
+         .modal-close {
+           font-size: 200%;
+           right: 15px;
+           top: 0;
+           position: absolute;
+         }
+
+         .modal-close:hover {
+           transform: rotate(360deg);/*rotate可以接受deg或者turn为单位的值*/
+         } /*此行也可写作：transform：rotate(1turn);*/
+
+    通过上述代码，close的旋转是在瞬间完成的，360deg意味着对称图形我们就根本看不到
+    transform的效果。因此，使用前面学到的transition来定义transform过程。
+    因此在close的初始样式内添加一行代码：
+        .modal-close {
+          font-size: 200%;
+          right: 15px;
+          top: 0;
+          position: absolute;
+          transition：transform 4s; /*transition使得整个变化的过程成为可视的动画*/
+        }
+
+  2. scale 和 translate
+    以创建一个交互的文本输入框为例，能够很好地说明scale和translate的作用：
+    我们需要的文本输入框，在默认状态下，框内包含有text placeholder，而在光标点击之后，
+    其中的placeholder移动到input文本框的顶部，同时改变其字体大小和颜色。
+    实现如下：
+    1> 首先实现focus状态下，字体颜色变化：
+          /*input的初始状态*/ .form-input + .form-label {
+                                position: relative;
+                                padding: 0 1em;
+                                color: #6A7989;
+                                transition: color 0.3s;
+                              }
+
+         /*input的focus状态*/ .form-input:focus + .form-label {
+                                 color: #333333;
+                               }
+    2> 然后，实现placeholder的大小变化：
+    首先说明scale的使用方法：
+    transform: scale(2); /*scale仅接受一个参数，那么元素将会在x轴和y轴方向同时拉伸*/
+    transform: scale(2, 4);/*两个参数则第一个参数为x轴，第二个参数为y轴拉伸倍数*/
+
+    还可以分别设置scaleX()和scaleY().
+
+        .form-input + .form-label {
+          position: relative;
+          transition: color 0.3s, transform 0.3s;
+        }
+
+        .form-input:focus + .form-label {
+          color: #333333;
+          transform: scale(0.8);
+        }
+    这样可以缩小text的大小，但是看起来text的却同时发生了我们并未定义的位置变化，
+    text内容右移了，为什么呢？
+    原因是在我们使用scale改变text大小的时候，是以text的对称中心为变化的基点的，
+    即：transform-origin：center center；
+    但是text的容器（box）的大小却没有变，因此也就造成了text与文本框的左边有了一段距离，
+    看起来就像是右移了。
+    通过改变元素的transform-origin值，就可以解决这一问题，
+         .form-input + .form-label {
+           position: relative;
+           transform-origin: center left;
+           transition: all 0.3s;
+         }
+
+         .form-input:focus + .form-label {
+           color: #333333;
+           transform: scale(0.8);
+         }
+
+   3> 实现focus状态placeholder移动到input文本框上部：
+         .form-input + .form-label {
+           position: relative;
+           transform-origin: center left;
+           transition: color 0.3s, transform 0.3s;/*transition: all 0.3s;*/
+         }
+
+         .form-input:focus + .form-label {
+           color: #333333;
+           transform: scale(0.8)  translateY(-40px);
+         }
+    
