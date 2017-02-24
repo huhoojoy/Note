@@ -1,0 +1,35 @@
+
+一 Media Queries (@media query)
+  1. 引入方法
+  <head>
+    <link rel="stylesheet" href="global.css" media="all" />
+    <link rel="stylesheet" href="main.css" media="screen" />
+    <link rel="stylesheet" href="paper.css" media="print" />
+
+    <link rel="stylesheet" href="mobile.css" media="handheld" />
+  </head>
+
+  2. 使用
+  @media screen/*media type*/ and (max-width/*query*/: 320px) {
+    body {
+      font-size: 100%;
+    }
+  }
+    上述代码设置了屏幕宽度≤320px设备中的body的字体大小，为默认字体的1005
+
+  3. 在实际应用中，上述的Media Queries代码放置于css样式表的底部
+  /* --------------------------------------------------------------------
+     Media Queries
+  =====================================================================*/
+
+  /* ≤320px */
+
+  @media <media type> and (<query>: <pixles>) {
+    <stylesheet>
+  }
+
+  4. 在设置本来为float的元素为stack状态时，要移除float样式：
+     .logo {
+       float: none;
+       width: inherit;
+     }
