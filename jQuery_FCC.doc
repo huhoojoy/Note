@@ -57,3 +57,11 @@
 **上面两个jQuery方法连在一起使用的情况，称为方法链：function chaining.
 
 11.Target the Parent of an Element Using jQuery
+
+
+12.jQuery 用CSS选择器来选取元素，target:nth-child(n) CSS选择器允许你按照索引顺序
+   (从1开始)选择目标元素的所有子元素。
+   示例：你可以给目标元素的第三个子元素添加bounce class。
+   $(".target:nth-child(3)").addClass("animated bounce");
+
+13.选择索引为奇数和偶数的元素（index从0开始）
