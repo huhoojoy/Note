@@ -1,0 +1,13 @@
+git命令
+
+    当你在本地创建了一个project，在GitHub创建了一个同样名字的project，此时你想要将它们
+关联在一起，以便以后每一次你修改了本地project的文件，都能够通过git命令与GitHub仓库里面
+的那个project关联起来。
+步骤如下：
+    打开Git Bash工具，输入：cd <project> 进入project的目录中；
+    输入：git init 初始化本地的project为Git管理下的版本库；
+    输入：git remote add origin git@github.com:youraccount/project.git,
+    这样就将本地库与远程库关联起来了；（远程库的名字即是：origin）
+    输入：git push -u origin master,将本地库的所有内容推送到远程库上。
+    （-u参数将两个库的master分支关联起来，今后可以简化命令直接使用git push推送）
+    此时就可以刷新远程库的页面，就可以看到完全与本地库的内容一样了。
