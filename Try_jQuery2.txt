@@ -1,0 +1,54 @@
+1 Ajax Basics
+1.1 Ajax means: Asynchronous Javascript And XML.
+    Ajax是一种实现客户端与服务器互动的技术。
+   （A client side technique for communicating with a web server.）
+    能够在不刷新已经载入的网页文件的情况下，载入需要载入的文件。
+
+1.2 通常使用jquery实现点击button显示ticket信息如下：
+   $('.confirmation').on('click', 'button', function(){
+     $(this).closest('.confirmation').find('.ticket').slideDown();
+   });
+   //使用这种方法的前提是，所有的这些元素已经存在于网页文件中，而只是hidden起来了。//
+
+1.3 使用ajax实现从客户端载入数据如下：
+    $('.confirmation').on('click', 'button', function(){
+      $.ajax('http://example.org/confirmation.html', {
+        success: function(response) { //runs only when the server returns a successful response.//
+          $('.ticket').html(response).slideDown();
+        }
+      });
+    });
+//Ajax Method: $.ajax(url[, setting]);//
+可以使用relative URL替换上述‘url’，即：$.ajax('/confirmation.html');
+
+1.4 Ajax Method 可以简写为：$.get Method.
+  $.get(url, success);
+  因此上面的代码可以替换为：
+      $.get('confirmation.html', function(response) {
+        $('.ticket').html(response).slideDown();
+      });
+      //Equivalent to $.ajax call above.//
+
+####1.5 虽然上述方法可以与客户端互动，获取文件，但是我们上面的代码永远都只能访问
+同一个confirmation文件，怎么才能向服务器在不同的情况下请求（request）不同的文件呢？
+答案是使用ajax的data方法：
+    $('.confirmation').on('click', 'button', function(){
+      $.ajax('confirmation.html', {
+        success: function(response) {
+          $('.ticket').html(response).slideDown();
+        },
+        data: {'confNum': 1234} //Object(对象文件)//
+      });
+    });
+
+而通常情况下，请求中所包含的数据（data）都是动态的（dynamic），我们需要从HTML中获取.
+    html:
+    <div class='ticket' data-confNum='1234'>
+
+    Js:
+    $.ajax('confirmation.html', {
+      success: function(response) {
+        $('.ticket').html(response).slideDown();
+      },
+      data: {'confNum': $('.ticket').data('confNum')}
+    });    //同样指向URL：confirmation.html?confNum=1234//
