@@ -1,2 +1,22 @@
-NaN:Not a Number.
-驼峰命名法：变量名的第一个单词的首写字母小写，后面的单词的第一个字母大写。
+1. NaN:Not a Number.
+2. 驼峰命名法：变量名的第一个单词的首写字母小写，后面的单词的第一个字母大写。
+3. Celsius:摄氏度， Fahrenheit:华氏度。
+
+4. 字符串变量 myStr 是不可变的。注意，这 并不 意味着 myStr 永远不能被改变，只是字符串
+字面量 string literal 的各个字符不能被改变。改变 myStr 中的唯一方法是重新
+给它赋一个值，就像这样：
+    var myStr = "Bob";
+    myStr = "Job";//重新赋值
+
+5. 使用数组（Array），我们可以在一个地方存储多个数据。
+   var sandwich = ["peanut butter", "jelly", "bread"]；//[]内的各个条目以，隔开//
+
+6. .push()函数接受一个或者多个参数，并把它推入到数组的末尾。
+   var arr = [1, 2, 3];
+   arr.push(4);
+   console.log(arr); //输出[1, 2, 3, 4];
+
+   .pop() 函数用来“抛出”一个数组末尾的值,
+   我们可以把这个“抛出”的值赋给一个变量存储起来。
+   var oneDown = [1, 4, 6].pop();
+   //现在 oneDown 的值为 6 ，数组变成了 [1, 4]//
