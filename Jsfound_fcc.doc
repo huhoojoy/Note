@@ -63,3 +63,77 @@
    在函数外，loc 是未定义的。
    //一个程序中有可能具有相同名称的局部变量和全局变量。在这种情况下，局部变量将会优先于
    全局变量。
+
+11. Boolean（布尔）值是Js中的另一种数据类型。
+    布尔 值要么是true 要么是false。它非常像电路开关， true 是“开”，false 是“关”。
+    这两种状态是互斥的。
+    Boolean 值绝不会写作被引号包裹起来的形式。字符串的 "true" 和 "false" 不是布尔值，
+    在 JavaScript 中也没有特殊含义。
+
+12. If 语句用于在代码中做条件判断。关键字 if 告诉 JavaScript 在小括号中的条件为真的
+    情况下去执行定义在大括号里面的代码。这种条件被称为 Boolean 条件，因为他们只可能是
+    true（真）或 false（假）。
+    当条件的计算结果为 true，程序执行大括号内的语句。当布尔条件的计算结果为 false，
+    大括号内的代码将不会执行。
+    伪代码：
+        if(条件为真){
+          语句被执行
+        }
+
+    示例：
+        function test (myCondition) {
+          if (myCondition) {
+             return "It was true";
+          }
+          return "It was false";
+        }
+        test(true);  // returns "It was true"
+        test(false); // returns "It was false"
+    当 test 被调用，并且传递进来的参数值为 true，if 语句会计算 myCondition 的结果，
+    看它是真还是假。如果条件为 true，函数会返回 "It was true"。当 test 被调用，
+    并且传递进来的参数值为 false，myCondition 不 为 true，并且不执行大括号后面的语句，
+    函数返回 "It was false"。
+
+12. 在 JavaScript 中，有很多相互比较的操作。所有这些操作符都返回一个true或false值。
+    最基本的运算符是相等运算符：==。相等运算符比较两个值，如果它们是同等，返回 true，
+    如果它们不等，返回 false。值得注意的是相等运算符不同于赋值运算符（=），赋值运算符
+    是把等号右边的值赋给左边的变量。
+    function equalityTest(myVal) {
+      if (myVal == 10) {
+        return "Equal";
+      }
+    return "Not Equal";
+    }
+    如果 myVal 等于 10，相等运算符会返回 true，因此大括号里面的代码会被执行，
+    函数将返回 "Equal"。否则，函数返回 "Not Equal"。
+
+    在 JavaScript 中，为了让两个不同的数据类型（例如数字和字符串）的值可以作比较，
+    它必须把一种类型转换为另一种类型。然而一旦这样做，它可以像下面这样来比较：
+       1   ==  1    // true
+       1   ==  2    // false
+       1   == '1'   // true
+      "3"  ==  3    // true
+
+13. 全等strict equal（===）是相对于相等操作符（==）的一种操作符。与相等操作符不同的是全等比较严格，
+    它会同时比较元素的值和数据类型。
+    举个例子：
+      3 === 3   // true
+      3 === '3' // false
+    3 是一个数字类型的，而'3' 是一个字符类型的，所以3不全等于'3'。
+
+14. 不相等运算符（!=）与相等运算符是相反的。这意味着不相等运算符中，如果“不为真”并且
+    返回 false 的地方，在相等运算符中会返回true，反之亦然。与相等运算符类似，不相等运算符
+    在比较的时候也会转换值的数据类型。
+    例如：
+        1 != 2      // true
+        1 != "1"    // false
+        1 != '1'    // false
+        1 != true   // false
+        0 != false  // false
+
+15. 不全等运算符（!==）与全等运算符是相反的。这意味着“不全等”并返回 false 的地方，
+    用全等运算会返回 true，反之亦然。全等运算符不会转换值的数据类型。
+    例如：
+        3 !== 3   // false
+        3 !== '3' // true
+        4 !== 3   // true
