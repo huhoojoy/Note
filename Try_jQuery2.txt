@@ -52,3 +52,64 @@
       },
       data: {'confNum': $('.ticket').data('confNum')}
     });    //同样指向URL：confirmation.html?confNum=1234//
+
+2 Ajax Options
+2.1 当发生error时，可以使用Ajax来处理错误信息：
+    $('.confirmation').on('click', 'button', function(){
+      $.ajax('confirmation.html', {
+        success: function(response) {
+          $('.ticket').html(response).slideDown();
+        },
+        data: {'confNum': 1234}, //Object(对象文件)//
+        error: function (request, errorType, errorMessage) {
+          alert('Error: ' + errorType + ' with message: ' + errorMessage);
+        } //这会在发生error时弹出对话框，提示用户发生的错误信息//
+      });
+    });
+    同样可以在error方法中为特定的元素（图片等）添加html元素，因此上面的alert可以替换
+    如下：
+    ...
+    error:function (request, errorType, errorMessage) {
+      $('.photos').html('<li>There was an error occured!</li>');
+    }
+    ...
+
+2.2 使用timeout来控制timeout speed：
+$('.confirmation').on('click', 'button', function(){
+  $.ajax('confirmation.html', {
+    success: function(response) {
+      $('.ticket').html(response).slideDown();
+    },
+    data: {'confNum': 1234} //Object(对象文件)//
+    error: function (request, errorType, errorMessage) {
+      alert('Error: ' + errorType + ' with message: ' + errorMessage);
+    }, //这会在发生error时弹出对话框，提示用户发生的错误信息//
+    timeout: 3000 //1s = 1000ms//
+  });
+});
+
+2.3 beforeSend 和 complete 回调函数：
+    使用这两个函数我们可以为页面内的元素添加css动画：
+    ...
+    beforeSend: function() {
+      $('.confirmation').addClass('is-loading');
+    }, //在ajax请求之前运行//
+    complete: function() {
+      $('.confirmation').removeClass('is-loading');
+    } //在success和error方法之后运行//
+    ...
+
+2.4 当我们的event handler是针对尚未加载的元素（该元素在ajax请求之后添加到页面已有
+元素中），在我们的ajax请求发生之前，event handler将无法工作。此时，我们需要使用
+Event Delegation(事件代理)来处理这种情况：
+    $('.confirmation .view-boarding-pass').on('click', function(){...});
+
+--->$('.confirmation').on('click', '.view-boarding-pass', function(){...});
+    //监听.confirmation内部的click事件，当click事件发生时，
+      确认目标是否为.view-boarding-pass//
+
+2.5 Event Delegation(事件代理)：
+    当需要为众多的子元素添加事件处理器时，如果逐一添加，那么代码的量将会非常大，而利用
+    Js本身特殊的事件冒泡机制，可以将子元素的事件委托给他的父元素，然后将事件处理的函数
+    赋给父元素，当事件被触发时，就会执行函数，此时，Js将会检查此子元素是否为所要进行
+    事件处理的元素，如果是，就返回函数对其事件的处理结果。
