@@ -1,0 +1,244 @@
+1. NaN:Not a Number.
+2. 驼峰命名法：变量名的第一个单词的首写字母小写，后面的单词的第一个字母大写。
+3. Celsius:摄氏度， Fahrenheit:华氏度。
+
+4. 字符串变量 myStr 是不可变的。注意，这 并不 意味着 myStr 永远不能被改变，只是字符串
+字面量 string literal 的各个字符不能被改变。改变 myStr 中的唯一方法是重新
+给它赋一个值，就像这样：
+    var myStr = "Bob";
+    myStr = "Job";//重新赋值
+
+5. 使用数组（Array），我们可以在一个地方存储多个数据。
+   var sandwich = ["peanut butter", "jelly", "bread"]；//[]内的各个条目以，隔开//
+
+6. .push()函数接受一个或者多个参数，并把它推入到数组的末尾。
+   var arr = [1, 2, 3];
+   arr.push(4);
+   console.log(arr); //输出[1, 2, 3, 4];
+
+   .pop() 函数用来“抛出”一个数组末尾的值,
+   我们可以把这个“抛出”的值赋给一个变量存储起来。
+   var oneDown = [1, 4, 6].pop();
+   //现在 oneDown 的值为 6 ，数组变成了 [1, 4]//
+
+  .shift()函数用来移出array中的第一项，移出的值可以赋给一个新的变量。
+  var arr = [1, 2, 3];
+  var newArr = arr.shift();
+  //arr的值变成了[2, 3], newArr的值为1.//
+
+  .unshift() 函数用起来就像 .push() 函数一样, 但不是在数组的末尾添加元素，
+  而是在数组的头部添加元素。
+
+7. 在 JavaScript 中，我们可以把代码的重复部分抽取出来，放到一个函数（functions）中。
+   这是一个函数（function）的例子：
+    function functionName() {
+      console.log("Hello World");
+    }
+   你可以通过函数名称functionName加上后面的小括号来调用这个函数（function），
+   就像这样：
+   functionName();
+   每次调用函数时它会打印出消息的“Hello World”到开发的控制台上。所有的大括号之间
+   的代码将在每次函数调用时执行。
+
+8. function(param)中的param为形参，可以是一个或多个；在我们调用这个函数时传入的参数
+   为实参，实参实际上就是在调用函数时形参的真正的值。function可以多次调用，每次调用
+   传入的参数都会决定形参的实际的值。
+
+9. 在 JavaScript 中，作用域（scope）涉及到变量的作用范围。
+   在函数外定义的变量具有全局作用域。
+   这意味着，具有全局作用域的变量可以在代码的任何地方被调用。
+   没有使用var关键字定义的变量，会被自动创建在全局作用域中，形成全局变量。当在代码
+   其他地方无意间定义了一个变量，刚好变量名与全局变量相同，这时会产生意想不到的后果。
+   因此应该总是使用var关键字来声明变量。
+
+10. 在一个函数内声明的变量，以及该函数的参数都是局部变量，意味着它们只在该函数内可见。
+    这是在函数 myTest内声明局部变量loc 的最佳例子：
+    function myTest() {
+      var loc = "foo";
+      console.log(loc);
+    }
+
+    myTest(); // "foo"
+    console.log(loc); // "undefined"
+   在函数外，loc 是未定义的。
+   //一个程序中有可能具有相同名称的局部变量和全局变量。在这种情况下，局部变量将会优先于
+   全局变量。
+
+11. Boolean（布尔）值是Js中的另一种数据类型。
+    布尔 值要么是true 要么是false。它非常像电路开关， true 是“开”，false 是“关”。
+    这两种状态是互斥的。
+    Boolean 值绝不会写作被引号包裹起来的形式。字符串的 "true" 和 "false" 不是布尔值，
+    在 JavaScript 中也没有特殊含义。
+
+12. If 语句用于在代码中做条件判断。关键字 if 告诉 JavaScript 在小括号中的条件为真的
+    情况下去执行定义在大括号里面的代码。这种条件被称为 Boolean 条件，因为他们只可能是
+    true（真）或 false（假）。
+    当条件的计算结果为 true，程序执行大括号内的语句。当布尔条件的计算结果为 false，
+    大括号内的代码将不会执行。
+    伪代码：
+        if(条件为真){
+          语句被执行
+        }
+
+    示例：
+        function test (myCondition) {
+          if (myCondition) {
+             return "It was true";
+          }
+          return "It was false";
+        }
+        test(true);  // returns "It was true"
+        test(false); // returns "It was false"
+    当 test 被调用，并且传递进来的参数值为 true，if 语句会计算 myCondition 的结果，
+    看它是真还是假。如果条件为 true，函数会返回 "It was true"。当 test 被调用，
+    并且传递进来的参数值为 false，myCondition 不 为 true，并且不执行大括号后面的语句，
+    函数返回 "It was false"。
+
+12. 在 JavaScript 中，有很多相互比较的操作。所有这些操作符都返回一个true或false值。
+    最基本的运算符是相等运算符：==。相等运算符比较两个值，如果它们是同等，返回 true，
+    如果它们不等，返回 false。值得注意的是相等运算符不同于赋值运算符（=），赋值运算符
+    是把等号右边的值赋给左边的变量。
+    function equalityTest(myVal) {
+      if (myVal == 10) {
+        return "Equal";
+      }
+    return "Not Equal";
+    }
+    如果 myVal 等于 10，相等运算符会返回 true，因此大括号里面的代码会被执行，
+    函数将返回 "Equal"。否则，函数返回 "Not Equal"。
+
+    在 JavaScript 中，为了让两个不同的数据类型（例如数字和字符串）的值可以作比较，
+    它必须把一种类型转换为另一种类型。然而一旦这样做，它可以像下面这样来比较：
+       1   ==  1    // true
+       1   ==  2    // false
+       1   == '1'   // true
+      "3"  ==  3    // true
+
+13. 全等strict equal（===）是相对于相等操作符（==）的一种操作符。与相等操作符不同的是全等比较严格，
+    它会同时比较元素的值和数据类型。
+    举个例子：
+      3 === 3   // true
+      3 === '3' // false
+    3 是一个数字类型的，而'3' 是一个字符类型的，所以3不全等于'3'。
+
+14. 不相等运算符（!=）与相等运算符是相反的。这意味着不相等运算符中，如果“不为真”并且
+    返回 false 的地方，在相等运算符中会返回true，反之亦然。与相等运算符类似，不相等运算符
+    在比较的时候也会转换值的数据类型。
+    例如：
+        1 != 2      // true
+        1 != "1"    // false
+        1 != '1'    // false
+        1 != true   // false
+        0 != false  // false
+
+15. 不全等运算符（!==）与全等运算符是相反的。这意味着“不全等”并返回 false 的地方，
+    用全等运算会返回 true，反之亦然。全等运算符不会转换值的数据类型。
+    例如：
+        3 !== 3   // false
+        3 !== '3' // true
+        4 !== 3   // true
+
+16. 如果你有非常多的选项需要选择，可以写很多个if-else语句，但是那样就会非常繁琐
+    而容易出错。这种情况下，可以使用switch语句。switch会根据不同的参数值匹配上
+    不同的case分支，语句会从第一个匹配的case分支开始执行，直到碰到break就结束。
+    测试case值使用严格等于（===），break关键字告诉javascript停止执行语句。
+    如果没有break关键字，下一个语句会继续执行, 所以一定要记住添加break关键字。
+    这是一个伪代码案例：
+        switch (num) {
+          case value1:
+            statement1;
+            break;
+          case value2:
+            statement2;
+            break;
+        ...
+          case valueN:
+            statementN;
+            break;
+       }
+
+17. 在switch 语句中你可能无法用case来指定所有情况，这时你可以添加default语句。
+    当再也找不到case匹配的时候，default语句会执行，非常类似于if/else组合中的else语句。
+    default语句应该是最后一个case：
+        switch (num) {
+          case value1:
+            statement1;
+            break;
+          case value2:
+            statement2;
+            break;
+        ...
+          default:
+            defaultStatement;
+        }
+
+18. 如果switch语句case分支的break语句漏掉了，后面的case语句会一直执行直到遇到break。
+    如果你有多个输入值和输出值一样，可以试试下面的switch语句：
+    switch(val) {
+      case 1:
+      case 2:
+      case 3:
+        result = "1, 2, or 3";
+        break;
+      case 4:
+        result = "4 alone";
+    }
+    //分支1、2、3将会产生相同的输出结果。//
+
+19. 对象和数组很相似，数组是通过索引来访问和修改数据，对象是通过属性来访问和修改数据的。
+    这是一个示例对象：
+
+    var cat = {
+      "name": "Whiskers",
+      "legs": 4,
+      "tails": 1,
+      "enemies": ["Water", "Dogs"]
+    };
+  //对象适合用来存储结构化数据，就和真实世界的对象一样，比如一只猫//
+
+
+20. 有两种方式访问对象属性，一个是点操作符(.)，一个是中括号操作符([])。
+    当你知道属性的名称的时候，使用点操作符。
+    这是一个使用点操作符读取对象属性的例子：
+    var myObj = {
+      prop1: "val1",
+      prop2: "val2"
+    };
+    var prop1val = myObj.prop1; // val1
+    var prop2val = myObj.prop2; // val2
+
+    第二种访问对象的方式就是中括号操作符([])，如果你想访问的属性的名称有一个空格，
+    这时你只能使用中括号操作符([])。
+    这是一个使用中括号操作符([])读取对象属性的例子：
+        var myObj = {
+          "Space Name": "Kirk",
+          "More Space": "Spock"
+        };
+        myObj["Space Name"]; // Kirk
+        myObj['More Space']; // Spock
+    //提示：属性名称中如果有空格，必须把属性名称用单引号或双引号包裹起来。
+
+    中括号操作符的另一个使用方式是用变量来访问一个属性。
+    当你需要遍历对象的属性列表或查表时，这种方式极为有用。
+    这有一个使用变量来访问属性的例子：
+        var someProp = "propName";
+        var myObj = {
+          propName: "Some Value"
+        }
+        myObj[someProp]; // "Some Value"
+
+    还有更多：
+        var myDog = "Hunter";
+        var dogs = {
+          Fido: "Mutt",
+          Hunter: "Doberman",
+          Snoopie: "Beagle"
+        }
+        var breed = dogs[myDog]; // "Hunter"
+        console.log(breed)// "Doberman"
+    //提示：当我们通过变量名访问属性的时候，不需要给变量名包裹引号。
+           因为实际上我们使用的是变量的值，而不是变量的名称。
+
+    在创建对象之后，也可以通过上述两种方式来为对象添加或删除变量及其值。
+    添加：myDog.bark = "woolf";
+    删除: delete myDog.bark;
