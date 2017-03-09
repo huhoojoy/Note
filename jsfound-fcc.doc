@@ -242,3 +242,54 @@
     在创建对象之后，也可以通过上述两种方式来为对象添加或删除变量及其值。
     添加：myDog.bark = "woolf";
     删除: delete myDog.bark;
+
+21. 有时检查一个对象属性是否存在是非常有用的，我们可以用.hasOwnProperty(propname)方法
+    来检查对象是否有该属性。如果有返回true，反之返回 false.
+    举例:
+    var myObj = {
+      top: "hat",
+      bottom: "pants"
+    };
+    myObj.hasOwnProperty("top");    // true
+    myObj.hasOwnProperty("middle"); // false
+    //注意：如果你需要通过变量来访问对象的属性值，请用中括号操作符，点操作符不支持变量。
+
+22. JSON: JavaScript-Object-Notation
+          JSON使用JS对象的格式来存储数据，JSON十分灵活，它允许的数据结构为 字符串，
+          数字，布尔值，和对象的任意组合。
+          这里是一个JSON对象的示例：
+          var ourMusic = [
+            {
+              "artist": "Daft Punk",
+              "title": "Homework",
+              "release_year": 1997,
+              "formats": [
+                "CD",
+                "Cassette",
+                "LP" ],
+              "gold": true
+            }
+          ];
+          //这是一个对象数组，并且对象有各种关于专辑的详细信息。
+            它也有一个嵌套的 formarts 的数组。附加专辑记录可以被添加到数组的最上层。
+          //通过串联起来的点操作符或中括号操作符来访问JSON对象的嵌套属性。
+
+23. 一个条件语句只能执行一次代码，而一个循环语句可以多次执行代码。
+    JavaScript 中最常见的循环就是“for循环”。
+    for循环中的三个表达式用分号隔开：
+
+       for ([初始化]; [条件判断]; [计数器])
+
+    初始化语句只会在执行循环开始之前执行一次。它通常用于定义和设置你的循环变量。
+    条件判断语句会在每一轮循环的开始执行，只要条件判断为 true 就会继续执行循环。
+    当条件为 false的时候，循环将停止执行。这意味着，如果条件在一开始就为 false，
+    这个循环将不会执行。
+    计数器是在每一轮循环结束时执行，通常用于递增或递减。
+    在下面的例子中，先初始化i = 0，条件 i < 5 为真，进入第一次循环，执行大括号里的代码，
+    第一次循环结束。递增i的值，条件判断，就这样依次执行下去，
+    直到条件判断为假，整个循环结束。
+        var ourArray = [];
+        for (var i = 0; i < 5; i++) {
+          ourArray.push(i);
+        }
+    最终 ourArray 的值为 [0,1,2,3,4].
