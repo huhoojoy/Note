@@ -113,3 +113,49 @@ Event Delegation(事件代理)来处理这种情况：
     Js本身特殊的事件冒泡机制，可以将子元素的事件委托给他的父元素，然后将事件处理的函数
     赋给父元素，当事件被触发时，就会执行函数，此时，Js将会检查此子元素是否为所要进行
     事件处理的元素，如果是，就返回函数对其事件的处理结果。
+
+3 JavaScript Objects
+  为了减少代码的杂乱，增加代码可读性，便于后期维护，可以使用JS object来使代码更加简洁。
+  创建一个JS object：
+      var confirmation = {
+        init: function() {
+        //这里放入事件处理器（event handlers）
+        }
+      }；
+  然后在document ready内部调用confirmation的方法对象：
+      $(document).ready(function() {
+        confirmation.init();
+      });
+  //这使得我们更加容易理解在加载文件时究竟发生了什么。//
+
+  尽管我们将event handlers放入到了init()中，但是event handlers内部的代码仍然很难理解，
+  因此我们可以将event handlers内部的function部分从init中拉出来，单独放到confirmation
+  内部，就像这样：
+      var confirmation = {
+        init: function() {
+          $('.confirmation').on('click', 'button', function() {
+            $.ajax('confirmation.html', {...});
+          });
+          $('.confirmation').on('click', '.view-boarding-pass', function(event) {...});
+        }
+      };
+      
+      $(document).ready(function() {
+        confirmation.init();
+      });
+
+  改变为：
+      var confirmation = {
+        init: function() {
+          $('.confirmation').on('click', 'button', this.loadConfirmation);
+          $('.confirmation').on('click', '.view-boarding-pass', this.showBoardingPass);
+        },
+        loadConfirmation: function() {
+          $.ajax('confirmation.html', {...});
+        },
+        showBoardingPass: function(event) {...}
+      };
+
+      $(document).ready(function() {
+        confirmation.init();
+      });
