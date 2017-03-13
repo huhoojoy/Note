@@ -139,7 +139,7 @@ Event Delegation(事件代理)来处理这种情况：
           $('.confirmation').on('click', '.view-boarding-pass', function(event) {...});
         }
       };
-      
+
       $(document).ready(function() {
         confirmation.init();
       });
@@ -159,3 +159,106 @@ Event Delegation(事件代理)来处理这种情况：
       $(document).ready(function() {
         confirmation.init();
       });
+
+4 JavaScript Function
+  我们的Object只能够限于一次返回一条信息，如果我们需要返回多条信息，就需要使用function。
+    var vacation = {
+      init: function() {
+        //init vacation
+      }
+    };
+  使用function则如下：
+    function Vacation(destination) {
+      //init vacation to destination
+    }
+
+    $(document).ready(function() {
+      var paris = new Vacation('paris');
+      var london = new Vacation('london');
+    }); //这样就可以多次调用函数，产生多条信息
+
+  function的一个例子：
+    function Vacation(destination) {
+      this.details = function (){
+        console.log(destination);
+      }
+    }
+
+  调用函数：
+    $(document).ready(function() {
+      var paris = new Vacation('Paris');
+      paris.details();
+      var london = new Vacation('London');
+      london.details();
+    });
+
+将我们的Obj放入可以重复使用的函数中,经过改写如下：
+  function Confirmation (el) { // el refers to the element
+    this.el = el;  // save a reference to the passed in element
+    // helper methods
+    this.loadConfirmation = function() {...}
+    this.showBoardingPass = function() {...}
+    // event handlers
+    this.el.on('click', 'button', this.loadConfirmation);
+    this.el.on('click', '.view-boarding-pass', this.showBoardingPass);
+  }
+
+  //create a new confirmation for each ticket
+  $(document).ready(function() {
+    var paris = new Confirmation($('#paris'));
+    var london = new Confirmation($('#london'));
+  })
+
+两个helper methods的内容需要适当改写：
+  this.loadConfirmation = function() {
+    $.ajax('confirmation.html', {
+      timeout: 3000,
+      success: function(response) {
+        $('.ticket').html(response).slideDown();
+      } //但是这样会选中所有的.ticket,而不是我们所点击的那一个。
+    });
+  }
+在.ajax内使用this来指代可以实现对被点击的元素的特指：
+    this.ticket.html(response).slideDown();
+然而这样的指代并不能达到我们想要的效果，因为我们认为this指代的内容为调用Confirmation时
+所传入的元素el，但实际上，这里的this指代已经被ajax改变，变成了指代ajax所设定的内容。
+所以这种情况下，正确的使用this的方法应该是：
+    首先在helper函数外部声明一个变量：
+      var confirmation = this;
+    然后在.ajax内增加一个context方法：
+      context：confirmation,
+
+    完整的函数应该写成如下：
+      function Confirmation(el) {
+        this.el = el;
+        this.ticket = this.el.find('.ticket');
+        var confirmation = this;
+
+        this.loadConfirmation = function() {
+          $.ajax('confirmation.html', {
+            timeout: 3000,
+            context: confirmation, // context使得我们能够在回调函数内部设置this
+            success: function(response) {
+              this.ticket.html(response).slideDown();
+            }
+          });
+        }
+      }
+
+    如果搞不清楚当前的this究竟指代的内容是什么，可以使用console.log()输出this的值到
+    控制台，以便查看：
+      this.showBoardingPass = function(event) {
+        event.preventDefault();
+        $('.view-boarding-pass').hide();
+        $('.boarding-pass').show();
+
+        console.log(this);
+        console.log(confirmation);
+      }
+
+    重写为：
+      this.showBoardingPass = function(event) {
+        event.preventDefault();
+        $('this').hide();
+        confirmation.el.find('.boarding-pass').show();
+      }
